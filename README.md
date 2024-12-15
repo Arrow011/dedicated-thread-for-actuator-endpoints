@@ -1,11 +1,5 @@
 # dedicated-thread-for-actuator-endpoints
 
-Table of Contents
-
-Problem Statement
-Solution
-
-
 Problem Statement
 By default, actuator endpoint requests in Spring Boot are served by the same thread pool as regular HTTP requests, which is typically the Tomcat HTTP connector thread pool. This means that actuator endpoint requests will compete with regular HTTP requests for thread resources.
 
@@ -17,7 +11,7 @@ Solution
 
 Without Separate Thread Pools:
 +-------------------------+
-| Main Thread Pool   |--- User Requests
+| Main Thread Pool          |--- User Requests
 |    Queue                  |--- Actuator Requests
 +------------------------+
 
@@ -25,8 +19,8 @@ Actuator request has to wait in the Main Queue.
 
 With Separate Thread Pools:
 +-------------------------+        +-----------------------------+
-| Main Thread Pool  |        | Actuator Thread Pool   |
-|    Queue                |         |        Queue                  |
+| Main Thread Pool  |                | Actuator Thread Pool   |
+|    Queue                |          |        Queue                  |
 +------------------------+        +------------------------------+
 
 Actuator request is handled independently.
